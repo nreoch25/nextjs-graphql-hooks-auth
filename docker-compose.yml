@@ -1,0 +1,33 @@
+version: "3"
+services:
+  db:
+    image: "mongo:latest"
+    ports:
+      - "27017:27017"
+  nginx:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - graphql
+      - client
+  graphql:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./server
+    volumes:
+      - /app/node_modules
+      - ./server:/app
+    depends_on:
+      - db
+  client:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./client
+    volumes:
+      - /app/node_modules
+      - ./client:/app
+    depends_on:
+      - graphql

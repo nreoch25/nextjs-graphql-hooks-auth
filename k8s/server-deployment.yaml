@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: server-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: server
+  template:
+    metadata:
+      labels:
+        component: server
+    spec:
+      containers:
+        - name: server
+          image: nreoch9/nextjs-graphql-auth-server:latest
+          ports:
+            - containerPort: 8000
+          env:
+            - name: MONGO_URI
+              value: "mongodb://database:27017/nextjs-graphql-auth"
+            - name: JWT_SECRET
+              value: "thisisthenextjsgraphqlauthsecret"
+            - name: CLIENT_URI
+              value: "192.168.55.141"
+            - name: PORT
+              value: "8000"
+            - name: MAIL_HOST
+              value: "smtp.mailtrap.io"
+            - name: MAIL_PORT
+              value: "2525"
+            - name: MAIL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mailuser
+                  key: MAIL_USER
+            - name: MAIL_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: mailpass
+                  key: MAIL_PASS

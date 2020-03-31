@@ -1,0 +1,28 @@
+{
+  "name": "nextjs-graphql-auth-server",
+  "version": "1.0.0",
+  "description": "A GraphQL server for NextJs GraphQL Auth",
+  "author": "Nigel Reoch",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "apollo-server-express": "^2.3.1",
+    "bcrypt": "^3.0.2",
+    "cookie-parser": "^1.4.3",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4",
+    "graphql": "^14.0.2",
+    "graphql-playground-middleware-express": "^1.7.12",
+    "graphql-resolvers": "^0.4.2",
+    "graphql-tools": "^4.0.3",
+    "jsonwebtoken": "^8.4.0",
+    "mongoose": "^5.4.0",
+    "nodemailer": "^5.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9"
+  }
+}

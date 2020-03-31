@@ -1,0 +1,13 @@
+{
+  "name": "nextjs-graphql-hooks-auth",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Nigel Reoch <nreoch9@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "concurrently \"cd server && yarn dev\" \"cd client && yarn dev\""
+  },
+  "devDependencies": {
+    "concurrently": "^5.1.0"
+  }
+}

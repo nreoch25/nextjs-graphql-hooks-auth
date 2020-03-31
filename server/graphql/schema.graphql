@@ -1,0 +1,47 @@
+type User {
+  _id: ID!
+  username: String!
+  email: String!
+}
+
+type Message {
+  _id: ID!
+  text: String!
+  sender: User!
+}
+
+type SuccessMessage {
+  message: String
+}
+
+type Auth {
+  token: String!
+}
+
+type Query {
+  users: [User!]!
+  me: User
+  messages: [Message!]!
+}
+
+type Mutation {
+  signupUser(
+    username: String!
+    email: String!
+    password: String!
+    passwordConfirm: String!
+  ): Auth!
+  signinUser(email: String!, password: String!): Auth!
+  signoutUser: SuccessMessage!
+  requestReset(email: String!): SuccessMessage!
+  resetPassword(
+    password: String!
+    passwordConfirm: String!
+    resetToken: String!
+  ): User!
+  postMessage(text: String!): Message!
+}
+
+type Subscription {
+  newMessage: Message!
+}

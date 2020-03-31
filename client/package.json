@@ -1,0 +1,50 @@
+{
+  "name": "nextjs-graphql-auth-client",
+  "version": "1.0.0",
+  "description": "A GraphQL client for NextJs GraphQL Auth",
+  "author": "Nigel Reoch",
+  "license": "MIT",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "test": "NODE_ENV=test jest"
+  },
+  "dependencies": {
+    "@apollo/react-hooks": "3.1.3",
+    "apollo-cache-inmemory": "1.6.5",
+    "apollo-client": "2.6.8",
+    "apollo-link-http": "1.5.16",
+    "apollo-link-ws": "1.0.19",
+    "graphql": "14.5.8",
+    "graphql-tag": "2.10.1",
+    "next": "9.1.7",
+    "next-with-apollo": "4.3.0",
+    "nprogress": "^0.2.0",
+    "react": "16.12.0",
+    "react-apollo": "^3.1.3",
+    "react-dom": "16.12.0",
+    "reactstrap": "8.2.0",
+    "subscriptions-transport-ws": "0.9.16"
+  },
+  "devDependencies": {
+    "babel-core": "7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.7.1",
+    "enzyme-to-json": "^3.3.5",
+    "jest": "24.3.0"
+  },
+  "jest": {
+    "verbose": true,
+    "setupFilesAfterEnv": [
+      "<rootDir>/__tests__/setup/setupEnzyme.js"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/__tests__/setup/"
+    ],
+    "transform": {
+      "^.+\\.js$": "babel-jest"
+    }
+  }
+}
