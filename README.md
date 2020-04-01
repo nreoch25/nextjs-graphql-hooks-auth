@@ -2,7 +2,7 @@
 
 ### Authentication system boilerplate application using NextJS, GraphQL, Apollo Client, Apollo Server, MongoDB, and Nginx
 
-_You will need a .env file in the server directory with the following environment variables_
+_You will need a .env file in the server directory with the following environment variables_\
 _This uses Mailtrap for testing the password reset functionality. see: https://mailtrap.io/_
 
 ```
