@@ -14,16 +14,14 @@ spec:
     spec:
       containers:
         - name: server
-          image: nreoch9/nextjs-graphql-auth-server:latest
+          image: nreoch9/nextjs-graphql-hooks-auth-server:latest
           ports:
             - containerPort: 8000
           env:
             - name: MONGO_URI
-              value: "mongodb://database:27017/nextjs-graphql-auth"
-            - name: JWT_SECRET
-              value: "thisisthenextjsgraphqlauthsecret"
+              value: "mongodb://database:27017/nextjs-graphql-hooks-auth"
             - name: CLIENT_URI
-              value: "192.168.55.141"
+              value: "192.168.55.143"
             - name: PORT
               value: "8000"
             - name: MAIL_HOST
@@ -40,3 +38,8 @@ spec:
                 secretKeyRef:
                   name: mailpass
                   key: MAIL_PASS
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: jwtsecret
+                  key: JWT_SECRET

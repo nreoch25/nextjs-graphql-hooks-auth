@@ -6,9 +6,9 @@ const config = {
     wsEndpoint: "ws://localhost/graphql"
   },
   production: {
-    clientEndpoint: "http://localhost/graphql",
-    serverEndpoint: "http://nginx/graphql",
-    wsEndpoint: "ws://localhost/graphql"
+    clientEndpoint: "http://192.168.55.143/graphql",
+    serverEndpoint: "http://192.168.55.143/graphql",
+    wsEndpoint: "ws://192.168.55.143/graphql"
   }
 }[env];
 
