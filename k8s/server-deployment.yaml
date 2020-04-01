@@ -21,7 +21,7 @@ spec:
             - name: MONGO_URI
               value: "mongodb://database:27017/nextjs-graphql-hooks-auth"
             - name: CLIENT_URI
-              value: "192.168.55.143"
+              value: "http://192.168.55.143"
             - name: PORT
               value: "8000"
             - name: MAIL_HOST
