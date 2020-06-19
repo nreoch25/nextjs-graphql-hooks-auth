@@ -2,8 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const { ApolloServer, gql, PubSub } = require("apollo-server-express");
 const jwt = require("jsonwebtoken");
-const expressPlayground = require("graphql-playground-middleware-express")
-  .default;
+const expressPlayground = require("graphql-playground-middleware-express").default;
 const { readFileSync } = require("fs");
 const { createServer } = require("http");
 const cookieParser = require("cookie-parser");
@@ -11,9 +10,7 @@ const User = require("./models/User");
 const Message = require("./models/Message");
 require("dotenv").config();
 
-const typeDefs = gql(
-  readFileSync("./graphql/schema.graphql", { encoding: "utf-8" })
-);
+const typeDefs = gql(readFileSync("./graphql/schema.graphql", { encoding: "utf-8" }));
 const resolvers = require("./graphql/resolvers");
 
 const app = express();
@@ -25,13 +22,13 @@ mongoose
   .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useCreateIndex: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
   })
   .then(() => console.log(`MongoDB connected at ${process.env.MONGO_URI}`))
-  .catch(error => console.error(error));
+  .catch((error) => console.error(error));
 
 const { ObjectId } = mongoose.Types;
-ObjectId.prototype.valueOf = function() {
+ObjectId.prototype.valueOf = function () {
   return this.toString();
 };
 
@@ -64,21 +61,21 @@ const graphQLServer = new ApolloServer({
         }
       }
       throw new Error("User is not authenticated");
-    }
-  }
+    },
+  },
 });
 
 graphQLServer.applyMiddleware({
   app,
   path: "/graphql",
-  cors: { origin: `http://${process.env.CLIENT_URI}`, credentials: true }
+  cors: { origin: `http://${process.env.CLIENT_URI}`, credentials: true },
 });
 
 app.get(
   "/playground",
   expressPlayground({
     endpoint: "/graphql",
-    subscriptionEndpoint: `ws://${process.env.CLIENT_URI}${graphQLServer.graphqlPath}`
+    subscriptionEndpoint: `ws://${process.env.SERVER_URI}${graphQLServer.graphqlPath}`,
   })
 );
 
@@ -87,6 +84,6 @@ graphQLServer.installSubscriptionHandlers(httpServer);
 
 httpServer.listen({ port }, () => {
   console.log(
-    `GraphQL Server running @ http://${process.env.CLIENT_URI}:${port}${graphQLServer.graphqlPath}`
+    `GraphQL Server running @ http://${process.env.SERVER_URI}${graphQLServer.graphqlPath}`
   );
 });

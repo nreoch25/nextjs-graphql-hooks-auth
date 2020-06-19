@@ -4,7 +4,7 @@ import User from "../components/Auth/User";
 
 const ProtectedPage = () => (
   <Layout>
-    <User>{me => <Protected me={me} />}</User>
+    <User>{(me) => <Protected me={me} />}</User>
   </Layout>
 );
 

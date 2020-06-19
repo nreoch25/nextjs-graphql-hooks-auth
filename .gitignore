@@ -76,4 +76,6 @@ typings/
 .fusebox/
 
 #DynamoDB Local files 
-.dynamodb/ 
+.dynamodb/
+
+nginx-proxy/

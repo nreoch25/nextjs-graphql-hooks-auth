@@ -1,4 +1,4 @@
-import { Mutation, useMutation } from "react-apollo";
+import { useMutation } from "@apollo/react-hooks";
 import { DropdownItem } from "reactstrap";
 import { CURRENT_USER_QUERY } from "./User";
 import SIGNOUT_MUTATION from "../../graphql/signout.mutation";
@@ -9,7 +9,7 @@ const Signout = () => {
     update: () => {
       localStorage.removeItem("token");
     },
-    refetchQueries: [{ query: CURRENT_USER_QUERY }]
+    refetchQueries: [{ query: CURRENT_USER_QUERY }],
   });
   return (
     <DropdownItem style={{ cursor: "pointer" }} onClick={signoutUser}>

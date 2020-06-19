@@ -7,9 +7,7 @@ import { WebSocketLink } from "apollo-link-ws";
 import { getMainDefinition } from "apollo-utilities";
 import config from "../config";
 
-const endpoint = process.browser
-  ? config.clientEndpoint
-  : config.serverEndpoint;
+const endpoint = process.browser ? config.clientEndpoint : config.serverEndpoint;
 
 const wsEndpoint = config.wsEndpoint;
 
@@ -21,18 +19,18 @@ export default withApollo(
       const token = process.browser ? localStorage.getItem("token") : null;
       operation.setContext({
         fetchOptions: {
-          credentials: "include"
+          credentials: "include",
         },
         headers: {
           ...headers,
-          Authorization: token ? `Bearer ${token}` : ""
-        }
+          Authorization: token ? `Bearer ${token}` : "",
+        },
       });
       return forward(operation);
     });
 
     const httpLink = createHttpLink({
-      uri: endpoint
+      uri: endpoint,
     });
 
     const wsLink = process.browser
@@ -46,8 +44,8 @@ export default withApollo(
                 return { authToken: token };
               }
               return {};
-            }
-          }
+            },
+          },
         })
       : () => {
           console.log("SSR");
@@ -56,11 +54,7 @@ export default withApollo(
     const link = split(
       ({ query }) => {
         const { kind, operation } = getMainDefinition(query);
-        return (
-          kind === "OperationDefinition" &&
-          operation === "subscription" &&
-          process.browser
-        );
+        return kind === "OperationDefinition" && operation === "subscription" && process.browser;
       },
       wsLink,
       httpLink
@@ -71,7 +65,7 @@ export default withApollo(
     return new ApolloClient({
       link: authLink.concat(link),
       cache,
-      connectToDevTools: true
+      connectToDevTools: true,
     });
   }
 );
