@@ -65,17 +65,27 @@ const graphQLServer = new ApolloServer({
   },
 });
 
+const corsEndpoint =
+  process.env.NODE_ENV === "development"
+    ? `http://${process.env.CLIENT_URI}`
+    : `https://${process.env.CLIENT_URI}`;
+
 graphQLServer.applyMiddleware({
   app,
   path: "/graphql",
-  cors: { origin: `http://${process.env.CLIENT_URI}`, credentials: true },
+  cors: { origin: corsEndpoint, credentials: true },
 });
+
+const subscriptionEndpoint =
+  process.env.NODE_ENV === "development"
+    ? `ws://${process.env.SERVER_URI}${graphQLServer.graphqlPath}`
+    : `wss://${process.env.SERVER_URI}${graphQLServer.graphqlPath}`;
 
 app.get(
   "/playground",
   expressPlayground({
     endpoint: "/graphql",
-    subscriptionEndpoint: `ws://${process.env.SERVER_URI}${graphQLServer.graphqlPath}`,
+    subscriptionEndpoint,
   })
 );
 
@@ -83,7 +93,6 @@ const httpServer = createServer(app);
 graphQLServer.installSubscriptionHandlers(httpServer);
 
 httpServer.listen({ port }, () => {
-  console.log(
-    `GraphQL Server running @ http://${process.env.SERVER_URI}${graphQLServer.graphqlPath}`
-  );
+  console.log(`GraphQL Server running @ ${process.env.SERVER_URI}${graphQLServer.graphqlPath}`);
+  console.log(`Subscriptions ready at ${process.env.SERVER_URI}${graphQLServer.subscriptionsPath}`);
 });
