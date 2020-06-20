@@ -70,6 +70,8 @@ const corsEndpoint =
     ? `http://${process.env.CLIENT_URI}`
     : `https://${process.env.CLIENT_URI}`;
 
+console.log("CORSENDPOINT", corsEndpoint);
+
 graphQLServer.applyMiddleware({
   app,
   path: "/graphql",
@@ -80,6 +82,8 @@ const subscriptionEndpoint =
   process.env.NODE_ENV === "development"
     ? `ws://${process.env.SERVER_URI}${graphQLServer.graphqlPath}`
     : `wss://${process.env.SERVER_URI}${graphQLServer.graphqlPath}`;
+
+console.log("SUBSCRIPTION ENDPOINT", subscriptionEndpoint);
 
 app.get(
   "/playground",

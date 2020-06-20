@@ -6,6 +6,13 @@ import Signin from "./Signin";
 
 const User = (props) => {
   const { data, loading, error } = useQuery(CURRENT_USER_QUERY);
+
+  if (!process.browser) {
+    console.log("USER QUERY DATA", data);
+    console.log("USER QUERY LOADING", loading);
+    console.log("USER QUERY ERROR", error);
+  }
+
   if (loading) {
     return <p>Loading...</p>;
   }

@@ -9,19 +9,18 @@ const Query = {
     if (!req.userId) {
       return null;
     }
+    console.log("ME QUERY", req.userId);
     const { _id, username, email } = await User.findById(req.userId);
+    console.log("CURRENT USER", { _id, username, email });
     return {
       _id,
       username,
-      email
+      email,
     };
   },
-  messages: combineResolvers(
-    isAuthenticated,
-    async (parent, args, { Message }) => {
-      return await Message.find({}).populate("sender");
-    }
-  )
+  messages: combineResolvers(isAuthenticated, async (parent, args, { Message }) => {
+    return await Message.find({}).populate("sender");
+  }),
 };
 
 module.exports = Query;
