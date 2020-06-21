@@ -36,6 +36,7 @@ app.use(cookieParser());
 // use cookie parser to populate current user
 app.use((req, res, next) => {
   const { token } = req.cookies;
+  console.log("TOKEN COOKIE", token);
   if (token) {
     const { _id } = jwt.verify(token, process.env.JWT_SECRET);
     // put the userId onto the req for future requests to access

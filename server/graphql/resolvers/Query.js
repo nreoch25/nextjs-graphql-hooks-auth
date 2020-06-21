@@ -7,6 +7,7 @@ const Query = {
   }),
   me: async (parent, args, { User, req }) => {
     if (!req.userId) {
+      console.log("RETURN NULL FOR USER");
       return null;
     }
     console.log("ME QUERY", req.userId);
