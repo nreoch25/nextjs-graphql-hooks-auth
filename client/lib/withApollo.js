@@ -65,6 +65,7 @@ export default withApollo(
     return new ApolloClient({
       link: authLink.concat(link),
       cache,
+      ssrMode: !process.browser,
       connectToDevTools: true,
     });
   }
