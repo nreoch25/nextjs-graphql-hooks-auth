@@ -1,5 +1,4 @@
 import { ApolloClient } from "apollo-client";
-import axios from "axios";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import withApollo from "next-with-apollo";
 import { createHttpLink } from "apollo-link-http";
@@ -11,15 +10,6 @@ import config from "../config";
 const endpoint = process.browser ? config.clientEndpoint : config.serverEndpoint;
 
 const wsEndpoint = config.wsEndpoint;
-
-if (!process.browser) {
-  console.log("NOT BROWSER");
-  console.log("ENDPOINT", endpoint);
-  consolelog("WSENDPOINT", wsEndpoint);
-  axios
-    .get("https://jsonplaceholder.typicode.com/todos/1")
-    .then((response) => console.log(response.data));
-}
 
 export default withApollo(
   // You can get headers and ctx (context) from the callback params

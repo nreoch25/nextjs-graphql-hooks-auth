@@ -7,11 +7,7 @@ const { transport, passwordResetEmail } = require("../../utils/mail");
 const createToken = require("../../utils/createToken");
 
 const Mutation = {
-  signupUser: async (
-    root,
-    { username, email, password, passwordConfirm },
-    { User, res }
-  ) => {
+  signupUser: async (root, { username, email, password, passwordConfirm }, { User, res }) => {
     const user = await User.findOne({ username });
     email = email.toLowerCase();
     if (user) {
@@ -24,14 +20,16 @@ const Mutation = {
     const newUser = await new User({
       username,
       email,
-      password
+      password,
     }).save();
 
     const token = createToken(newUser, process.env.JWT_SECRET);
     // set the jwt as a cookie on the response
     res.cookie("token", token, {
+      domain: ".developal.ca",
+      secure: process.env.NODE_ENV === "production" ? true : false,
       httpOnly: true,
-      maxAge: 1000 * 60 * 60 * 24 // 1 day cookie
+      maxAge: 1000 * 60 * 60 * 24, // 1 day cookie
     });
 
     return { token };
@@ -50,11 +48,13 @@ const Mutation = {
     const token = createToken(user, process.env.JWT_SECRET);
     // set the jwt as a cookie on the response
     res.cookie("token", token, {
+      domain: ".developal.ca",
+      secure: process.env.NODE_ENV === "production" ? true : false,
       httpOnly: true,
-      maxAge: 1000 * 60 * 60 * 24 // 1 day cookie
+      maxAge: 1000 * 60 * 60 * 24, // 1 day cookie
     });
     return {
-      token
+      token,
     };
   },
   signoutUser: async (root, args, { res }) => {
@@ -78,7 +78,7 @@ const Mutation = {
       { email },
       {
         resetToken,
-        resetTokenExpiry
+        resetTokenExpiry,
       }
     );
     // send an email with the reset token
@@ -88,15 +88,11 @@ const Mutation = {
       subject: "Your Password Reset Token",
       html: passwordResetEmail(`Your Password Reset Token is here!
       \n\n
-      <a href="${process.env.CLIENT_URI}/reset?resetToken=${resetToken}">Click Here to Reset</a>`)
+      <a href="${process.env.CLIENT_URI}/reset?resetToken=${resetToken}">Click Here to Reset</a>`),
     });
     return { message: "Thanks" };
   },
-  resetPassword: async (
-    root,
-    { password, passwordConfirm, resetToken },
-    { User, res }
-  ) => {
+  resetPassword: async (root, { password, passwordConfirm, resetToken }, { User, res }) => {
     // check if passwords match
     if (password !== passwordConfirm) {
       throw new Error("Your passwords don't match");
@@ -106,7 +102,7 @@ const Mutation = {
     const expiryCheck = Date.now() - 3600000;
     const user = await User.findOne({
       resetToken,
-      resetTokenExpiry: { $gt: expiryCheck }
+      resetTokenExpiry: { $gt: expiryCheck },
     });
     if (!user) {
       throw new Error("This token is either invalid or expired");
@@ -120,15 +116,17 @@ const Mutation = {
       {
         password: hashedPassword,
         resetToken: null,
-        resetTokenExpiry: null
+        resetTokenExpiry: null,
       }
     );
     // generate a JWT
     const token = createToken(updatedUser, process.env.JWT_SECRET);
     // set the JWT cookie
     res.cookie("token", token, {
+      domain: ".developal.ca",
+      secure: process.env.NODE_ENV === "production" ? true : false,
       httpOnly: true,
-      maxAge: 1000 * 60 * 60 * 24 // 1 day cookie
+      maxAge: 1000 * 60 * 60 * 24, // 1 day cookie
     });
     return updatedUser;
   },
@@ -137,14 +135,14 @@ const Mutation = {
     async (parent, { text }, { Message, req, pubsub }) => {
       const newMessage = new Message({
         text,
-        sender: req.userId
+        sender: req.userId,
       });
       const message = await newMessage.save();
       const populatedMessage = await message.populate("sender").execPopulate();
       pubsub.publish("message-added", { newMessage: populatedMessage });
       return populatedMessage;
     }
-  )
+  ),
 };
 
 module.exports = Mutation;
