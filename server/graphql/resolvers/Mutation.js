@@ -26,7 +26,7 @@ const Mutation = {
     const token = createToken(newUser, process.env.JWT_SECRET);
     // set the jwt as a cookie on the response
     res.cookie("token", token, {
-      domain: ".developal.ca",
+      domain: process.env.DOMAIN,
       secure: process.env.NODE_ENV === "production" ? true : false,
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24, // 1 day cookie
@@ -48,7 +48,7 @@ const Mutation = {
     const token = createToken(user, process.env.JWT_SECRET);
     // set the jwt as a cookie on the response
     res.cookie("token", token, {
-      domain: ".developal.ca",
+      domain: process.env.DOMAIN,
       secure: process.env.NODE_ENV === "production" ? true : false,
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24, // 1 day cookie
@@ -58,7 +58,7 @@ const Mutation = {
     };
   },
   signoutUser: async (root, args, { res }) => {
-    res.clearCookie("token");
+    res.clearCookie("token", { domain: process.env.DOMAIN });
     return { message: "Come back soon" };
   },
   requestReset: async (root, { email }, { User, res }) => {
@@ -123,7 +123,7 @@ const Mutation = {
     const token = createToken(updatedUser, process.env.JWT_SECRET);
     // set the JWT cookie
     res.cookie("token", token, {
-      domain: ".developal.ca",
+      domain: process.env.DOMAIN,
       secure: process.env.NODE_ENV === "production" ? true : false,
       httpOnly: true,
       maxAge: 1000 * 60 * 60 * 24, // 1 day cookie
