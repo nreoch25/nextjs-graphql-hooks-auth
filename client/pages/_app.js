@@ -1,6 +1,5 @@
-import { ApolloProvider } from "@apollo/react-hooks";
+import { ApolloProvider } from "react-apollo";
 import App from "next/app";
-import { getDataFromTree } from "@apollo/react-ssr";
 import withApollo from "../lib/withApollo";
 
 class MyApp extends App {
@@ -21,4 +20,4 @@ class MyApp extends App {
     );
   }
 }
-export default withApollo(MyApp, { getDataFromTree });
+export default withApollo(MyApp);

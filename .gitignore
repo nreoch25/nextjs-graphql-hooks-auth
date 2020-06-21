@@ -78,5 +78,5 @@ typings/
 #DynamoDB Local files 
 .dynamodb/
 
-nginx-proxy-api/
+nginx-proxy-server/
 nginx-proxy-client/

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useMutation } from "@apollo/react-hooks";
+import { useMutation } from "react-apollo";
 import {
   Alert,
   Button,
@@ -11,7 +11,7 @@ import {
   Card,
   CardBody,
   CardFooter,
-  CardHeader
+  CardHeader,
 } from "reactstrap";
 import CURRENT_USER_QUERY from "../../graphql/current-user.query";
 import SIGNIN_MUTATION from "../../graphql/signin.mutation";
@@ -20,7 +20,7 @@ const Signin = () => {
   const [user, setUser] = useState({
     email: "",
     password: "",
-    mutationComplete: false
+    mutationComplete: false,
   });
   const [signinUser, { error }] = useMutation(SIGNIN_MUTATION, {
     variables: user,
@@ -33,11 +33,11 @@ const Signin = () => {
     onCompleted: () => {
       setUser({
         ...user,
-        mutationComplete: true
+        mutationComplete: true,
       });
-    }
+    },
   });
-  const saveToState = evt => {
+  const saveToState = (evt) => {
     setUser({ ...user, [evt.target.name]: evt.target.value });
   };
 
@@ -49,7 +49,7 @@ const Signin = () => {
           <CardBody>
             <Form
               method="post"
-              onSubmit={async evt => {
+              onSubmit={async (evt) => {
                 evt.preventDefault();
                 setUser({ ...user, email: "", password: "" });
                 await signinUser();

@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery } from "react-apollo";
 import PropTypes from "prop-types";
 import CURRENT_USER_QUERY from "../../graphql/current-user.query";
 import Signin from "./Signin";

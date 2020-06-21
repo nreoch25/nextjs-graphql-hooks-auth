@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useMutation } from "@apollo/react-hooks";
+import { useMutation } from "react-apollo";
 import {
   Alert,
   Button,
@@ -11,7 +11,7 @@ import {
   Card,
   CardBody,
   CardFooter,
-  CardHeader
+  CardHeader,
 } from "reactstrap";
 import RESET_MUTATION from "../../graphql/reset.mutation";
 import CURRENT_USER_QUERY from "../../graphql/current-user.query";
@@ -20,19 +20,18 @@ const Reset = ({ resetToken }) => {
   const [user, setUser] = useState({
     password: "",
     passwordConfirm: "",
-    mutationCompleted: false
+    mutationCompleted: false,
   });
   const [resetPassword, { error }] = useMutation(RESET_MUTATION, {
     variables: {
       resetToken,
       password: user.password,
-      passwordConfirm: user.passwordConfirm
+      passwordConfirm: user.passwordConfirm,
     },
     refetchQueries: [{ query: CURRENT_USER_QUERY }],
-    onCompleted: () =>
-      setUser({ password: "", passwordConfirm: "", mutationComplete: true })
+    onCompleted: () => setUser({ password: "", passwordConfirm: "", mutationComplete: true }),
   });
-  const saveToState = evt => {
+  const saveToState = (evt) => {
     setUser({ ...user, [evt.target.name]: evt.target.value });
   };
   return (
@@ -43,7 +42,7 @@ const Reset = ({ resetToken }) => {
           <CardBody>
             <Form
               method="post"
-              onSubmit={async evt => {
+              onSubmit={async (evt) => {
                 evt.preventDefault();
                 await resetPassword();
               }}

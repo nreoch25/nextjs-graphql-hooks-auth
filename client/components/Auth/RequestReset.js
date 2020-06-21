@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useMutation } from "@apollo/react-hooks";
+import { useMutation } from "react-apollo";
 import {
   Alert,
   Button,
@@ -11,7 +11,7 @@ import {
   Card,
   CardBody,
   CardFooter,
-  CardHeader
+  CardHeader,
 } from "reactstrap";
 import REQUEST_RESET_MUTATION from "../../graphql/request-reset.mutation";
 
@@ -19,23 +19,21 @@ const RequestReset = () => {
   const [user, setUser] = useState({ email: "", mutationComplete: false });
   const [requestReset, { error }] = useMutation(REQUEST_RESET_MUTATION, {
     variables: {
-      email: user.email
+      email: user.email,
     },
-    onCompleted: () => setUser({ email: "", mutationComplete: true })
+    onCompleted: () => setUser({ email: "", mutationComplete: true }),
   });
-  const saveToState = evt => {
+  const saveToState = (evt) => {
     setUser({ ...user, [evt.target.name]: evt.target.value });
   };
   return (
     <Row style={{ paddingTop: "100px" }}>
       <Col sm="12" md={{ size: 8, offset: 2 }} lg={{ size: 6, offset: 3 }}>
         <Card>
-          <CardHeader className="text-center">
-            Request Password reset
-          </CardHeader>
+          <CardHeader className="text-center">Request Password reset</CardHeader>
           <CardBody>
             <Form
-              onSubmit={async evt => {
+              onSubmit={async (evt) => {
                 evt.preventDefault();
                 await requestReset();
               }}

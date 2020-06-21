@@ -1,5 +1,5 @@
 import { Fragment, useState } from "react";
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery } from "react-apollo";
 import {
   Collapse,
   Navbar,
@@ -10,7 +10,7 @@ import {
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem
+  DropdownItem,
 } from "reactstrap";
 import Link from "next/link";
 import CURRENT_USER_QUERY from "../../graphql/current-user.query";
@@ -72,7 +72,7 @@ const Header = () => {
                         style={{
                           cursor: "pointer",
                           textDecoration: "none",
-                          color: "#212529"
+                          color: "#212529",
                         }}
                       >
                         Reset password
@@ -97,7 +97,7 @@ const Header = () => {
                       style={{
                         cursor: "pointer",
                         textDecoration: "none",
-                        color: "#212529"
+                        color: "#212529",
                       }}
                     >
                       Reset password
