@@ -91,6 +91,8 @@ app.get(
   expressPlayground({
     endpoint: "/graphql",
     subscriptionEndpoint,
+    introspection: true,
+    playground: true,
   })
 );
 
