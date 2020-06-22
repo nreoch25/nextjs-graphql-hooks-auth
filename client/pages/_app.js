@@ -1,6 +1,5 @@
-import { ApolloProvider } from "react-apollo";
 import App from "next/app";
-import withApollo from "../lib/withApollo";
+import { withApollo } from "../lib/withApollo";
 
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
@@ -12,12 +11,8 @@ class MyApp extends App {
     return { pageProps };
   }
   render() {
-    const { Component, pageProps, apollo } = this.props;
-    return (
-      <ApolloProvider client={apollo}>
-        <Component {...pageProps} />
-      </ApolloProvider>
-    );
+    const { pageProps, Component } = this.props;
+    return <Component {...pageProps} />;
   }
 }
-export default withApollo(MyApp);
+export default withApollo({ ssr: true })(MyApp);

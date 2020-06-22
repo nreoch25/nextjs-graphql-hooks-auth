@@ -1,7 +1,6 @@
-import { useMutation } from "react-apollo";
+import { useMutation } from "@apollo/react-hooks";
 import { DropdownItem } from "reactstrap";
 import { CURRENT_USER_QUERY } from "./User";
-import SIGNOUT_MUTATION from "../../graphql/signout.mutation";
 import SIGN_OUT_MUTATION from "../../graphql/signout.mutation";
 
 const Signout = () => {
