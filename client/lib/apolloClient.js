@@ -27,7 +27,7 @@ export default function createApolloClient(initialState, headers) {
   });
 
   const httpLink = createHttpLink({
-    uri: endpoint,
+    uri: "https://auth2.developal.ca/graphql",
     fetch,
   });
 
