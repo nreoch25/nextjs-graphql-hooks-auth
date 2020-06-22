@@ -64,6 +64,8 @@ const graphQLServer = new ApolloServer({
       throw new Error("User is not authenticated");
     },
   },
+  introspection: true,
+  playground: true,
 });
 
 const corsEndpoint =
@@ -91,8 +93,6 @@ app.get(
   expressPlayground({
     endpoint: "/graphql",
     subscriptionEndpoint,
-    introspection: true,
-    playground: true,
   })
 );
 
