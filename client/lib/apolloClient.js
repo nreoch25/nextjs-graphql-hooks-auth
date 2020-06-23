@@ -19,7 +19,6 @@ export default function createApolloClient(initialState, headers) {
         credentials: "include",
       },
       headers: {
-        ...headers,
         Authorization: token ? `Bearer ${token}` : "",
       },
     });
@@ -27,7 +26,7 @@ export default function createApolloClient(initialState, headers) {
   });
 
   const httpLink = createHttpLink({
-    uri: "https://auth2.developal.ca/graphql",
+    uri: endpoint,
     fetch,
   });
 
