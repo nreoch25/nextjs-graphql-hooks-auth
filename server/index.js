@@ -64,8 +64,6 @@ const graphQLServer = new ApolloServer({
       throw new Error("User is not authenticated");
     },
   },
-  introspection: true,
-  playground: true,
 });
 
 const corsEndpoint =
