@@ -20,6 +20,7 @@ export default function createApolloClient(initialState, headers) {
       },
       headers: {
         Authorization: token ? `Bearer ${token}` : "",
+        cookie: headers && headers.cookie,
       },
     });
     return forward(operation);
