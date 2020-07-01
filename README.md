@@ -11,11 +11,14 @@ _This uses Mailtrap for testing the password reset functionality. see: https://m
 MONGO_URI  - URI pointing to your mongodb instance
 CLIENT_URI - Client side URI
 JWT_SECRET - Secret for jsonwebtoken
+SERVER_URI - Server side URI
+DOMAIN     - Domain for Cookie
 PORT       - GraphQL server port
 MAIL_HOST  - Mailtrap host
 MAIL_PORT  - Mailtrap port
 MAIL_USER  - Mailtrap user
 MAIL_PASS  - Mailtrap password
+NODE_ENV   - Node environment
 ```
 
 To run in development mode
