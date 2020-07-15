@@ -6,9 +6,9 @@ const config = {
     wsEndpoint: "ws://localhost/graphql",
   },
   production: {
-    clientEndpoint: "",
-    serverEndpoint: "",
-    wsEndpoint: "",
+    clientEndpoint: "https://auth.developal.ca/graphql",
+    serverEndpoint: "https://auth.developal.ca/graphql",
+    wsEndpoint: "wss://auth.developal.ca/graphql",
   },
 }[env];
 
