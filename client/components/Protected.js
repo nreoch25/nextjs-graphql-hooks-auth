@@ -1,14 +1,9 @@
 import { Fragment } from "react";
-import Router from "next/router";
 import MessageForm from "./Messages/MessageForm";
 import Messages from "./Messages";
 import { Row, Col } from "reactstrap";
 
 const Protected = ({ me }) => {
-  if (process.browser && !me) {
-    Router.push("/signin");
-    return null;
-  }
   return (
     <Fragment>
       <Row style={{ paddingTop: "30px" }}>

@@ -1,31 +1,16 @@
-import { Fragment } from "react";
-import { useQuery } from "@apollo/react-hooks";
+import { Fragment, useContext } from "react";
 import PropTypes from "prop-types";
-import CURRENT_USER_QUERY from "../../graphql/current-user.query";
 import Signin from "./Signin";
+import UserContext from "../../context/UserContext";
 
 const User = (props) => {
-  const { data, loading, error } = useQuery(CURRENT_USER_QUERY);
+  const { me } = useContext(UserContext);
 
-  if (!process.browser) {
-    console.log("USER QUERY DATA", data);
-    console.log("USER QUERY LOADING", loading);
-    console.log("USER QUERY ERROR", error);
-  }
-
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
-  if (error) {
-    return <p>Error: {JSON.stringify(error.message)}</p>;
-  }
-
-  if (!data.me) {
+  if (!me) {
     return <Signin />;
   }
 
-  return <Fragment>{props.children(data.me)}</Fragment>;
+  return <Fragment>{props.children(me)}</Fragment>;
 };
 
 User.propTypes = {
@@ -33,4 +18,3 @@ User.propTypes = {
 };
 
 export default User;
-export { CURRENT_USER_QUERY };

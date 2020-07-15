@@ -14,7 +14,7 @@ import {
   CardHeader,
 } from "reactstrap";
 import SIGNUP_MUTATION from "../../graphql/signup.mutation";
-import { CURRENT_USER_QUERY } from "../Auth/User";
+import CURRENT_USER_QUERY from "../../graphql/current-user.query";
 
 const Signup = () => {
   const [user, setUser] = useState({

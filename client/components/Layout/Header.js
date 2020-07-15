@@ -1,5 +1,4 @@
-import { Fragment, useState } from "react";
-import { useQuery } from "@apollo/react-hooks";
+import { Fragment, useState, useContext } from "react";
 import {
   Collapse,
   Navbar,
@@ -13,23 +12,13 @@ import {
   DropdownItem,
 } from "reactstrap";
 import Link from "next/link";
-import CURRENT_USER_QUERY from "../../graphql/current-user.query";
 import Signout from "../Auth/Signout";
+import UserContext from "../../context/UserContext";
 
 const Header = () => {
-  const { loading, error, data } = useQuery(CURRENT_USER_QUERY);
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
-
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
-  if (error) {
-    return <p>Error: {JSON.stringify(error.message)}</p>;
-  }
-
-  const { me } = data;
+  const { me } = useContext(UserContext);
 
   return (
     <Navbar color="dark" dark expand="md">
