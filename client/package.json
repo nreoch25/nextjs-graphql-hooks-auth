@@ -30,7 +30,7 @@
     "react-dom": "16.13.1",
     "reactstrap": "8.4.1",
     "subscriptions-transport-ws": "0.9.16",
-    "ws": "7.1.2"
+    "ws": "7.4.6"
   },
   "devDependencies": {
     "babel-core": "7.0.0-bridge.0",
