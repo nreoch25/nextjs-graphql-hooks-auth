@@ -28,3 +28,8 @@ $ docker-compose up
 ```
 
 **NOTE: There is a production deployment pipeline setup with TravisCI, DockerHub, and Kubernetes that runs in a Minikube cluster. I can supply full instructions if needed to get you setup for the production deployment pipeline**
+
+
+### Infrastructure model
+
+![Infrastructure model](.infragenie/infrastructure_model.png)
