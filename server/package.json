@@ -19,7 +19,7 @@
     "graphql-redis-subscriptions": "^2.2.1",
     "graphql-resolvers": "^0.4.2",
     "graphql-tools": "^4.0.3",
-    "jsonwebtoken": "^8.4.0",
+    "jsonwebtoken": "^9.0.0",
     "mongoose": "^5.4.0",
     "nodemailer": "^5.0.0"
   },
