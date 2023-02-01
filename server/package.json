@@ -20,7 +20,7 @@
     "graphql-resolvers": "^0.4.2",
     "graphql-tools": "^4.0.3",
     "jsonwebtoken": "^8.4.0",
-    "mongoose": "^5.4.0",
+    "mongoose": "^5.13.15",
     "nodemailer": "^5.0.0"
   },
   "devDependencies": {
